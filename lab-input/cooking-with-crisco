@@ -1,0 +1,9 @@
+#!/usr/bin/env Python3
+
+friedChicken = ["Chicken", "Flour", "Cornstarch", "Eggs", "Buttermilk"]
+seasoningBlend = ["paprika", "old bay", "garlic", "onion powder", "cayenne pepper", "oregano", "salt", "pepper"]
+
+groceries = friedChicken + seasoningBlend
+
+print(friedChicken[2])
+
