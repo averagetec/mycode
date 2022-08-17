@@ -23,7 +23,7 @@ def showStatus():
     # print what the player is carrying
     print('Inventory:', inventory)
     # check if there's an item in the room, if so print it
-    if "item" in rooms[currentRoom]:
+    if len(rooms[currentRoom]['item']) > 0:
         print('You see a ' +str(rooms[currentRoom]['item']).strip("[]"))
       
     print("---------------------------")
@@ -39,17 +39,17 @@ rooms = {
                   'south' : 'Kitchen',
                   'east' : 'Dining Room',
                   'west' : 'Bunker',
-                  'item' : 'key'
+                  'item' : ['key']
                 },
 
             'Kitchen' : {
                   'north' : 'Hall',
-                  'item' : 'monster',
+                  'item' : ['monster'],
                 },
             'Dining Room' : {
                 'west' : 'Hall',
                 'south' : 'Garden',
-                'item' : 'potion'
+                'item' : ['potion']
             },
             'Garden' : {
                 'north' : 'Dining Room'
@@ -96,12 +96,18 @@ while True:
         # 1. if the current room contains an item
         # 2. if the item in the room matches the item the player wishes to get
         if "item" in rooms[currentRoom] and move[1] in rooms[currentRoom]['item']:
-            #add the item to their inventory
+        #add the item to their inventory
             inventory.append(move[1])
+            for i in range(len(rooms[currentRoom]['item'])):
+                if move[1] == rooms[currentRoom]['item'][i]:
+                    print('You got the ' + move[1] + '!')
+        # delete the item from the room
+                    del rooms[currentRoom]['item'][i]
+                    break
             #display a helpful message
-            print(move[1] + ' got!')
+                    print(move[1] + ' got!')
             #delete the item key:value pair from the room's dictionary
-            rooms[currentRoom]['item'].remove(str(move[1]))
+           # rooms[currentRoom]['item'].remove(str(move[1]))
         # if there's no item in the room or the item doesn't match
         else:
             #tell them they can't get it
